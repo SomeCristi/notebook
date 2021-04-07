@@ -135,8 +135,6 @@ module.exports = function (webpackEnv) {
             postcssNormalize(),
           ],
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-          modules: true,
-          localIdentName: '[path][name]__[local]--[hash:base64:5]'
         },
       },
     ].filter(Boolean);
