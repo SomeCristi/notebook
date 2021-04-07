@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import './NoteForm.css';
 
-const NoteForm = props => {
+const NoteForm = React.memo(props => {
   const [ title, setTitle] = useState('');
   const [ body, setBody] = useState('');
 
   return (
     <section className="note-form">
       <Card>
-        <form onSubmit={submitHandler}>
+        {/* a function must be passed to onSubmit */}
+        <form onSubmit={() => props.addNoteHandler({body: body, title: title})}>
           <div className="form-control">
             <label htmlFor="title">Title</label>
             <input
@@ -18,7 +19,7 @@ const NoteForm = props => {
               id="title"
               value={title}
               onChange={event => {
-                setTittle(event.target.value)
+                setTitle(event.target.value)
               }}
             />
           </div>
@@ -40,4 +41,6 @@ const NoteForm = props => {
       </Card>
     </section>
   )
-}
+})
+
+export default NoteForm;
