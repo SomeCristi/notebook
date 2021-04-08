@@ -3,15 +3,23 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import './NoteForm.css';
 
-const NoteForm = React.memo(props => {
+const NoteForm = props => {
   const [ title, setTitle] = useState('');
   const [ body, setBody] = useState('');
+
+  const submitHandler = event => {
+    // prevent the form from being submitted because otherwise it will refresh the page
+    // and the state from notes will be lost
+    event.preventDefault();
+    props.addNote({title: title, body: body})
+  };
+
 
   return (
     <section className="note-form">
       <Card>
         {/* a function must be passed to onSubmit */}
-        <form onSubmit={() => props.addNoteHandler({body: body, title: title})}>
+        <form onSubmit={submitHandler}>
           <div className="form-control">
             <label htmlFor="title">Title</label>
             <input
@@ -41,6 +49,6 @@ const NoteForm = React.memo(props => {
       </Card>
     </section>
   )
-})
+}
 
 export default NoteForm;
