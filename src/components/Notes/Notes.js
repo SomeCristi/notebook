@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import NoteForm from './NoteForm'
 
 const Notes = () => {
-  notes = [];
-  
-  addNoteHandler = note => {
-    notes << note;
+  const [ notes, setNotes ] = useState([]);
+  const addNoteHandler = note => {
+    setNotes(prevNotes => [...prevNotes, note]);
   };
 
   return (
-    <NoteForm submitHandler={addNoteHandler}/>
+    <section>
+      <div>
+      <NoteForm addNote={addNoteHandler}/>
+      </div>
+
+      <div>
+        <ul>
+          <li>ceva</li>
+          {notes.map(note => (
+            <li key={note.title}>
+              {note.title + " " +  note.body}
+            </li>
+          ))}  
+        </ul>
+      </div>
+    </section>
   );
 }
+
+export default Notes;
