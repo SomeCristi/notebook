@@ -1,11 +1,11 @@
 import React from 'react';
 
-import NoteForm from './components/Notes/NoteForm'
+import Notes from './components/Notes/Notes';
 
 function App() {
   return (
     <div className="App">
-      <NoteForm />
+      <Notes />
     </div>
   );
 }
