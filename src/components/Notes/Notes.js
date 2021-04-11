@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import NoteForm from './NoteForm'
+import NoteForm from './NoteForm';
+import NoteList from './NoteList';
 
 const Notes = () => {
   const [ notes, setNotes ] = useState([]);
@@ -13,16 +14,8 @@ const Notes = () => {
       <div>
       <NoteForm addNote={addNoteHandler}/>
       </div>
-
       <div>
-        <ul>
-          <li>ceva</li>
-          {notes.map(note => (
-            <li key={note.title}>
-              {note.title + " " +  note.body}
-            </li>
-          ))}  
-        </ul>
+        <NoteList notes={notes}/>
       </div>
     </section>
   );
