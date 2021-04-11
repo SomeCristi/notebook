@@ -8,9 +8,9 @@ const NoteList = props => {
       {props.notes.map(note => (
         <Card style={{ width: '18rem' }}>
           <Card.Body>
-          <Card.Title>{note.title}</Card.Title>
-          <Card.Text>{note.body}</Card.Text>
-            </Card.Body>
+            <Card.Title>{note.title}</Card.Title>
+            <Card.Text>{note.body}</Card.Text>
+          </Card.Body>
         </Card>
       ))}
     </CardDeck>
