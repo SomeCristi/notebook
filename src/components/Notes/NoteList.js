@@ -1,17 +1,19 @@
 import React from 'react';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Card from "react-bootstrap/Card";
 
 const NoteList = props => {
   return(
-    <div class="card-deck">
+    <CardDeck>
       {props.notes.map(note => (
-        <div class="card" style={{width: "18rem"}}>
-          <div class="card-body">
-            <h5 class="card-title">{note.title}</h5>
-            <p class="card-text">{note.body}</p>
-          </div>
-        </div>
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+          <Card.Title>{note.title}</Card.Title>
+          <Card.Text>{note.body}</Card.Text>
+            </Card.Body>
+        </Card>
       ))}
-    </div>
+    </CardDeck>
   );
 };
 
