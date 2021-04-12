@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import Card from '../UI/Card';
-import './NoteForm.css';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 
 const NoteForm = props => {
   const [ title, setTitle] = useState('');
@@ -14,40 +15,35 @@ const NoteForm = props => {
     props.addNote({title: title, body: body})
   };
 
-
   return (
-    <section className="note-form">
-      <Card>
-        {/* a function must be passed to onSubmit */}
-        <form onSubmit={submitHandler}>
-          <div className="form-control">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={event => {
-                setTitle(event.target.value)
-              }}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="body">Body</label>
-            <input
-              type="text"
-              id="body"
-              value={body}
-              onChange={event => {
-                setBody(event.target.value)
-              }}
-            />
-          </div>
-          <div className="note-form_actions">
-            <button type="submit">Create note</button>
-          </div>
-        </form>
-      </Card>
-    </section>
+    <Form onSubmit={submitHandler}>
+      <Form.Group as={Col} md="6" controlId='formBasicTitle'>
+        <Form.Label>Title</Form.Label>
+        <Form.Control
+          required 
+          type='text' 
+          placeholder='Enter title'
+          value={title}
+          onChange={event => {
+            setTitle(event.target.value)
+          }} 
+        />
+      </Form.Group>
+
+      <Form.Group as={Col} md="6" controlId='formBasicBody'>
+        <Form.Label>Body</Form.Label>
+        <Form.Control
+          required 
+          type='text' 
+          placehodler='Enter body'
+          value={body}
+          onChange={event => {
+            setBody(event.target.value)
+          }}
+        />
+      </Form.Group>
+      <Button type="submit">Submit form</Button>
+    </Form>
   )
 }
 
