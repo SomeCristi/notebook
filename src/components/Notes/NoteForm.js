@@ -17,7 +17,7 @@ const NoteForm = props => {
 
   return (
     <Form onSubmit={submitHandler}>
-      <Form.Group as={Col} md="6" controlId='formBasicTitle'>
+      <Form.Group as={Col} md="4" controlId='formBasicTitle'>
         <Form.Label>Title</Form.Label>
         <Form.Control
           required 
@@ -30,17 +30,20 @@ const NoteForm = props => {
         />
       </Form.Group>
 
-      <Form.Group as={Col} md="6" controlId='formBasicBody'>
+      <Form.Group as={Col} md="4" controlId='formBasicBody'>
         <Form.Label>Body</Form.Label>
         <Form.Control
           required 
-          type='text' 
-          placehodler='Enter body'
+          as="textarea"
+          placeholder='Enter body'
           value={body}
           onChange={event => {
             setBody(event.target.value)
           }}
+          aria-label="With textarea"
+          rows={7}
         />
+      
       </Form.Group>
       <Button type="submit">Submit form</Button>
     </Form>
