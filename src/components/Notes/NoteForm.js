@@ -13,7 +13,7 @@ const NoteForm = props => {
     // prevent the form from being submitted because otherwise it will refresh the page
     // and the state from notes will be lost
     event.preventDefault();
-    props.addNote({title: title, category: category, body: body})
+    props.onAddNote({title: title, category: category, body: body})
   };
 
   return (

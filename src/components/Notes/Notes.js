@@ -7,7 +7,7 @@ import axios from '../../axios-notes';
 class Notes extends React.Component {
   state = { notes: [] };
 
-  // NU MERGE ASTA
+  // ERROR HANDLING si SPINNER gasesti la hooks ep 19
   componentDidMount() {
     axios.get('/notes.json')
       .then(response => {
@@ -28,8 +28,15 @@ class Notes extends React.Component {
   
   addNoteHandler = note => {
     axios.post('/notes.json', note);
-    this.setState(prevNotes => ({
+    this.setState(() => ({
       notes: [...this.state.notes, note]
+    }));
+  };
+
+  removeNoteHandler = noteId => {
+    axios.delete('/notes.json', noteId);
+    this.setState(() => ({
+      notes: this.state.notes.filter(note => note.id !== noteId)
     }));
   };
 
@@ -37,10 +44,13 @@ class Notes extends React.Component {
     return (
       <section>
         <div>
-        <NoteForm addNote={this.addNoteHandler}/>
+        <NoteForm onAddNote={this.addNoteHandler}/>
         </div>
         <div>
-          <NoteList notes={this.state.notes}/>
+          <NoteList 
+            notes={this.state.notes}
+            onRemoveItem={this.removeNoteHandler}
+          />
         </div>
       </section>
     )
