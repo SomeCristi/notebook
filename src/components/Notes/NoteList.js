@@ -5,6 +5,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 const NoteList = props => {
+  const removeNote = (event, noteId) => {
+    event.preventDefault();
+    props.onRemoveItem(noteId)
+  };
+
   return(
     <CardDeck>
       {props.notes.map(note => (
@@ -21,7 +26,7 @@ const NoteList = props => {
               size="sm" 
               style={{ float: 'right' }} 
               className="float-right"
-              onClick={props.onRemoveItem.bind(this, note.id)}
+              onClick={event => removeNote(event, note.id)}
             >
               Delete note
             </Button>

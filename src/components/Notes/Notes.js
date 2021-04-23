@@ -11,7 +11,6 @@ class Notes extends React.Component {
   componentDidMount() {
     axios.get('/notes.json')
       .then(response => {
-        console.log(response.data);
         const loadedNotes = [];
         for (const key in response.data) {
           loadedNotes.push({
@@ -27,17 +26,29 @@ class Notes extends React.Component {
   }
   
   addNoteHandler = note => {
-    axios.post('/notes.json', note);
-    this.setState(() => ({
-      notes: [...this.state.notes, note]
-    }));
+    axios
+      .post('/notes.json', note)
+      .then(response => {
+        this.setState(() => ({
+          notes: [...this.state.notes, { id: response.data.name, ...note }]
+        }));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   removeNoteHandler = noteId => {
-    axios.delete('/notes.json', noteId);
-    this.setState(() => ({
-      notes: this.state.notes.filter(note => note.id !== noteId)
-    }));
+    axios
+      .delete(`/notes/${noteId}.json`)
+      .then(() => {
+        this.setState(prevState=> ({
+          notes: prevState.notes.filter(note => note.id !== noteId)
+        }));
+      })
+      .catch(err => {
+        console.log(err);
+      })
   };
 
   render(){
