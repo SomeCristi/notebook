@@ -10,8 +10,6 @@ const NoteForm = props => {
   const [ category, setCategory ] = useState('');
 
   const submitHandler = event => {
-    // prevent the form from being submitted because otherwise it will refresh the page
-    // and the state from notes will be lost
     event.preventDefault();
     props.onAddNote({title: title, category: category, body: body})
   };
